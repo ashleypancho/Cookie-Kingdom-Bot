@@ -22,6 +22,16 @@ ckQuotes = ["cheesewoof: i'll sleep after this episode" ,
             "cheesewolf: Tell me how my ass tastes, bobby flay"
             ]
 
+insultGenerator = ["Fuck your couch.","You silly buttface.","Bitch, please.","I see your face when I am dreaming. That's why I always wake up screaming.",
+                   "Roses are red, violets are blue, sugar is sweet, and so are you; But the roses are wilting, the violets are dead, the sugar bowl's empty, and so is your head.",
+                   "Simon says shut up.","I hope your eulogy is written in comic sans.","You're the reason we can't have nice things.","I refuse to have a battle of wits with an unarmed person.",
+                   "I'd like to help you out. Which way did you come in?","Anybody who told you to be yourself couldn't have given you worse advice.",
+                   "Roses are red, shit is brown, shut the fuck up, and sit the fuck down.","Why don't you slip into something more comfortable. May I suggest a coma?",
+                   "Don't let your mind wander. It's far too small to be out on its own.","Your mother was a hamster and your father smelt of elderberries!","Dweeb.","You piece of poo poo.","You are impossible to underestimate.",
+                   "Stupid head.","You're so ugly, your portraits hang themselves.","You're the AT&T of people.","I fart in your general direction.","You're a fun-vampire. You don't suck blood; you just suck.",
+                   "You are a pizza burn on the roof of the world's mouth.","You are the opposite of Batman.","If you don't think, you shouldn't talk.","You are a sad, strange little man.",
+                   "Oh, it's just you. I was afraid it was someone important."]
+
 mulaneyQuotes = ["Here’s how easy it was to get away with bank robbery back in the ‘30s… as long as you weren’t still there when the police arrived, you had a 99% change of getting away with it.",
                  "I bet whenever Trump has to make a decision, he asks himself, \"What would a cartoon rich person do?\"",
                  "Donald Trump is not just a rich man, he’s what a hobo imagines a rich man to be.",
@@ -52,14 +62,20 @@ async def hello(*args):
 
 @my_bot.command()
 async def info(*args):
-    help = "List of commands: " \
+    help = "List of commands (items in [] denote optional input): " \
            "\nck: Returns a random quote from a Cookie Kingdom regular" \
            "\nfmk name1 name2 name3: Fuck, marry, kill" \
+           "\ninsult: Spews a random insult."\
            "\nmulaney: Returns a random John Mulaney quote" \
            "\nrandom: Returns a random quote" \
            "\nxkcd [number]: Returns a random xkcd comic unless a number is specified."
 
     return await my_bot.say(help) #add this
+
+@my_bot.command()
+async def insult(*args):
+    x = randint(0,len(insultGenerator)-1)
+    return await my_bot.say(insultGenerator[x])
 
 @my_bot.command()
 async def mulaney(*args):
