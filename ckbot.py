@@ -5,6 +5,8 @@ import discord
 from discord.ext.commands import Bot
 
 import urllib.request
+from bs4 import BeautifulSoup
+import re
 
 playing = "Just Chatting | //help"
 botgame = discord.Game(name=playing)
@@ -114,11 +116,13 @@ async def ck(*args):
 async def xkcd(*args):
     if len(args) != 0:
         url = "https://xkcd.com/" + args[0] + "/"
-        html = urllib.request.urlopen(url)
-        result = html.read()
+        soup = BeautifulSoup(urllib.request.urlopen(url).read())
+        comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
+        result = "https:" + comic[0]['src']
     else:
-        x = randint(0,1800)
-        result = "https://xkcd.com/" + str(x) + "/"
+        soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read())
+        comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
+        result = "https:" + comic[0]['src']
     return await my_bot.say(result);
 
 my_bot.run("MjcwNjE1MzMyNjY4ODMzODAy.C3aTbw.kN3EJGs3Vdw-EVdI825fICcc5Zw")
