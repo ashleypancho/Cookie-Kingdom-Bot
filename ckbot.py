@@ -77,10 +77,9 @@ async def info(*args):
            "\nmulaney: Returns a random John Mulaney quote" \
            "\nrandom: Returns a random quote" \
            "\nxkcd [number]: Returns a random xkcd comic unless a number is specified." \
-           "\nwhitecard: Returns a random CaH white card." \
-           "\nblackcard: Returns a random CaH black card." \
- \
-            return await my_bot.say(help) #add this
+           "\nwhite: Returns a random CaH white card." \
+           "\nblack: Returns a random CaH black card."
+    return await my_bot.say(help)
 
 @my_bot.command()
 async def insult(*args):
@@ -93,14 +92,14 @@ async def mulaney(*args):
     return await my_bot.say(mulaneyQuotes[x])
 
 @my_bot.command()
-async def whitecard(*args):
+async def white(*args):
     x = randint(0,len(whiteCards)-1)
-    return await my_bot.say(whitecards[x])
+    return await my_bot.say(whiteCards[x])
 
 @my_bot.command()
-async def blackcard(*args):
+async def black(*args):
     x = randint(0,len(blackCards)-1)
-    return await my_bot.say(blackcards[x])
+    return await my_bot.say(blackCards[x])
 
 @my_bot.command()
 async def random(*args):
