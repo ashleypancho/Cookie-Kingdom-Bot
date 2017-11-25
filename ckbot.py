@@ -8,6 +8,8 @@ import urllib.request
 from bs4 import BeautifulSoup
 import re
 
+import twitter, os
+
 playing = "Just Chatting | //help"
 botgame = discord.Game(name=playing)
 
@@ -78,7 +80,8 @@ async def info(*args):
            "\nrandom: Returns a random quote" \
            "\nxkcd [number]: Returns a random xkcd comic unless a number is specified." \
            "\nwhite: Returns a random CaH white card." \
-           "\nblack: Returns a random CaH black card."
+           "\nblack: Returns a random CaH black card." \
+            "\ntwitter [username]: Returns the latest tweet from the specified user."
     return await my_bot.say(help)
 
 @my_bot.command()
@@ -142,7 +145,21 @@ async def xkcd(*args):
         result = "https:" + comic[0]['src']
     return await my_bot.say(result);
 
-my_bot.run("MjcwNjE1MzMyNjY4ODMzODAy.C3aTbw.kN3EJGs3Vdw-EVdI825fICcc5Zw")
+@my_bot.command()
+async def twitter(*args):
+    if len(args) != 0:
+        api = twitter.Api(
+            consumer_key=os.environ.get('TWITTER_CONSUMER_KEY'),
+            consumer_secret=os.environ.get('TWITTER_CONSUMER_SECRET'),
+            access_token_key=os.environ.get('TWITTER_ACCESS_TOKEN_KEY'),
+            access_token_secret=os.environ.get('TWITTER_ACCESS_TOKEN_SECRET')
+        )
+        statuses = api.GetUserTimeline(screen_name=args[0],include_rts=False, exclude_replies=True)
+        return await my_bot.say("@" + statuses[0].user.screen_name + ": " + statuses[0].text)
+    else:
+        return await my_bot.say("No twitter user specified! Syntax: " + my_bot.command_prefix + "twitter [username]")
+
+my_bot.run(os.environ.get('DISCORD_KEY'))
 
 
 # Link to add to servers:
