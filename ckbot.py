@@ -157,7 +157,7 @@ async def xkcd(*args):
 
 
 @my_bot.command()
-async def twitter(*args):
+async def twit(*args):
 	if len(args) != 0:
 		api = twitter.Api(
 			consumer_key=os.environ.get('TWITTER_CONSUMER_KEY'),
