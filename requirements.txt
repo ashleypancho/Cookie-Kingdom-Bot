@@ -3,3 +3,5 @@ aiohttp
 websockets
 chardet
 beautifulsoup4
+boto
+python-twitter

@@ -55,10 +55,12 @@ randQuotes = ["Friendship is like peeing your pants, everyone can see it but onl
               "I'm a lot like JFK, once the car gets sticky, ladies tend to run with reckless abandon.",
               "Me me big boy",
               "Once you've heard Ice Cube call someone a noob, when he would have really called them a punk-ass bitch, you've lived life to it's fullest.",
-             ]
+              ]
 
 
 my_bot = Bot(command_prefix="//")
+my_bot.change_presence(game=discord.Game(name=playing))
+
 @my_bot.event
 async def on_read():
     print("Client logged in")
@@ -75,13 +77,13 @@ async def info(*args):
     help = "List of commands (items in [] denote optional input): " \
            "\nck: Returns a random quote from a Cookie Kingdom regular" \
            "\nfmk name1 name2 name3: Fuck, marry, kill" \
-           "\ninsult: Spews a random insult."\
+           "\ninsult: Spews a random insult." \
            "\nmulaney: Returns a random John Mulaney quote" \
            "\nrandom: Returns a random quote" \
            "\nxkcd [number]: Returns a random xkcd comic unless a number is specified." \
            "\nwhite: Returns a random CaH white card." \
            "\nblack: Returns a random CaH black card." \
-            "\ntwitter [username]: Returns the latest tweet from the specified user."
+           "\ntwitter [username]: Returns the latest tweet from the specified user."
     return await my_bot.say(help)
 
 @my_bot.command()
@@ -114,7 +116,7 @@ async def fmk(*args):
     arr = []
     for x in args:
         arr.append(x)
-    result = "";
+    result = ""
 
     x = randint(0,2)
     result += "Fuck: " + arr[x]
@@ -143,7 +145,7 @@ async def xkcd(*args):
         soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read())
         comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
         result = "https:" + comic[0]['src']
-    return await my_bot.say(result);
+    return await my_bot.say(result)
 
 @my_bot.command()
 async def twitter(*args):
@@ -160,7 +162,6 @@ async def twitter(*args):
         return await my_bot.say("No twitter user specified! Syntax: " + my_bot.command_prefix + "twitter [username]")
 
 my_bot.run(os.environ.get('DISCORD_KEY'))
-
 
 # Link to add to servers:
 # https://discordapp.com/oauth2/authorize?client_id=270615332668833802&scope=bot&permissions=0
