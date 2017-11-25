@@ -74,7 +74,7 @@ async def hello():
 
 @my_bot.command()
 async def info():
-	help = "List of commands (items in [] denote optional input): " \
+	help = "List of commands (items in [] denote input): " \
 		   "\nck: Returns a random quote from a Cookie Kingdom regular" \
 		   "\nfmk name1 name2 name3: Fuck, marry, kill" \
 		   "\ninsult: Spews a random insult." \
@@ -83,7 +83,7 @@ async def info():
 		   "\nxkcd [number]: Returns a random xkcd comic unless a number is specified." \
 		   "\nwhite: Returns a random CaH white card." \
 		   "\nblack: Returns a random CaH black card." \
-		   "\ntwitter [username]: Returns the latest tweet from the specified user."
+		   "\ntwit [username]: Returns the latest tweet from the specified user."
 	return await my_bot.say(help)
 
 
