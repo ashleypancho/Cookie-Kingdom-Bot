@@ -33,46 +33,15 @@ ckQuotes = ["cheesewoof: i'll sleep after this episode" ,
 			"cheesewolf: Tell me how my ass tastes, bobby flay"
 			]
 
-insultGenerator = ["Fuck your couch.",
-				   "You silly buttface.",
-				   "Bitch, please.",
-				   "I see your face when I am dreaming. That's why I always wake up screaming.",
-				   "Pacifists have a special exception for your face","Honey, pay the little idiot boy so he'll go away.",
-				   "Roses are red, violets are blue, sugar is sweet, and so are you; But the roses are wilting, the violets are dead, the sugar bowl's empty, and so is your head.",
-				   "You suck more than pneumatic bank tubes",
-				   "Simon says shut up.",
-				   "I hope your eulogy is written in comic sans.",
-				   "You're the reason we can't have nice things.",
-				   "I refuse to have a battle of wits with an unarmed person.",
-				   "You look like a bad clickbait article.",
-				   "I'd like to help you out. Which way did you come in?",
-				   "Anybody who told you to be yourself couldn't have given you worse advice.",
-				   "You don't even qualify for Weenie Hut Jr.'s",
-				   "SMOrc wouldn't touch that face.",
-				   "Roses are red, shit is brown, shut the fuck up, and sit the fuck down.",
-				   "Why don't you slip into something more comfortable. May I suggest a coma?",
-				   "You have the same functionality of a dick-flavored lolly.",
-				   "Don't let your mind wander. It's far too small to be out on its own.",
-				   "Your mother was a hamster and your father smelt of elderberries!",
-				   "Dweeb.",
-				   "You piece of poo poo.",
-				   "You are impossible to underestimate.",
-				   "Stupid head.",
-				   "You're so ugly, your portraits hang themselves.",
-				   "You're the AT&T of people.",
-				   "I fart in your general direction.",
-				   "You're a fun-vampire. You don't suck blood; you just suck.",
-				   "r/cringe wouldn't even upvote",
-				   "You are a pizza burn on the roof of the world's mouth.",
-				   "You are the opposite of Batman.",
-				   "If you don't think, you shouldn't talk.",
-				   "You are a sad, strange little man.",
-				   "You're Maxwell's party killer.",
-				   "Oh, it's just you. I was afraid it was someone important.",
-				   "You're like the pancreas of a diabetic person.",
-				   "not worth insulting",
-				   "Wheately considers you a good idea.","Take off, hoser!",
-				   "You're like the beautiful jellyfish of the Atlantic; Spineless."]
+insultGenerator = ["Fuck your couch.","You silly buttface.","Bitch, please.","I see your face when I am dreaming. That's why I always wake up screaming.","Pacifists have a special exception for your face","Honey, pay the little idiot boy so he'll go away.",
+				   "Roses are red, violets are blue, sugar is sweet, and so are you; But the roses are wilting, the violets are dead, the sugar bowl's empty, and so is your head.","You suck more than pneumatic bank tubes",
+				   "Simon says shut up.","I hope your eulogy is written in comic sans.","You're the reason we can't have nice things.","I refuse to have a battle of wits with an unarmed person.","You look like a bad clickbait article.",
+				   "I'd like to help you out. Which way did you come in?","Anybody who told you to be yourself couldn't have given you worse advice.","You don't even qualify for Weenie Hut Jr.'s","SMOrc wouldn't touch that face.",
+				   "Roses are red, shit is brown, shut the fuck up, and sit the fuck down.","Why don't you slip into something more comfortable. May I suggest a coma?","You have the same functionality of a dick-flavored lolly.",
+				   "Don't let your mind wander. It's far too small to be out on its own.","Your mother was a hamster and your father smelt of elderberries!","Dweeb.","You piece of poo poo.","You are impossible to underestimate.",
+				   "Stupid head.","You're so ugly, your portraits hang themselves.","You're the AT&T of people.","I fart in your general direction.","You're a fun-vampire. You don't suck blood; you just suck.","r/cringe wouldn't even upvote",
+				   "You are a pizza burn on the roof of the world's mouth.","You are the opposite of Batman.","If you don't think, you shouldn't talk.","You are a sad, strange little man.","You're Maxwell's party killer.",
+				   "Oh, it's just you. I was afraid it was someone important.","You're like the pancreas of a diabetic person.","not worth insulting","Wheately considers you a good idea.","Take off, hoser!","You're like the beautiful jellyfish of the Atlantic; Spineless."]
 
 mulaneyQuotes = ["Here’s how easy it was to get away with bank robbery back in the ‘30s… as long as you weren’t still there when the police arrived, you had a 99% change of getting away with it.",
 				 "I bet whenever Trump has to make a decision, he asks himself, \"What would a cartoon rich person do?\"",
@@ -99,12 +68,12 @@ async def on_read():
 
 
 @my_bot.command()
-async def hello(message):
-	await my_bot.send_message(message.channel, "Hello, world!")
+async def hello():
+	return await my_bot.say("Hello, world!")
 
 
 @my_bot.command()
-async def info(message):
+async def info():
 	help = "List of commands (items in [] denote optional input): " \
 		   "\nck: Returns a random quote from a Cookie Kingdom regular" \
 		   "\nfmk name1 name2 name3: Fuck, marry, kill" \
@@ -114,42 +83,42 @@ async def info(message):
 		   "\nxkcd [number]: Returns a random xkcd comic unless a number is specified." \
 		   "\nwhite: Returns a random CaH white card." \
 		   "\nblack: Returns a random CaH black card." \
-		   "\ntwit [username]: Returns the latest tweet from the specified user."
-	await my_bot.send_message(message.channel, help)
+		   "\ntwitter [username]: Returns the latest tweet from the specified user."
+	return await my_bot.say(help)
 
 
 @my_bot.command()
-async def insult(message):
+async def insult(*args):
 	x = randint(0,len(insultGenerator)-1)
-	await my_bot.send_message(message.channel, insultGenerator[x])
+	return await my_bot.say(insultGenerator[x])
 
 
 @my_bot.command()
-async def mulaney(message):
+async def mulaney(*args):
 	x = randint(0,len(mulaneyQuotes)-1)
-	await my_bot.send_message(message.channel, mulaneyQuotes[x])
+	return await my_bot.say(mulaneyQuotes[x])
 
 
 @my_bot.command()
-async def white(message):
+async def white(*args):
 	x = randint(0,len(whiteCards)-1)
-	await my_bot.send_message(message.channel, whiteCards[x])
+	return await my_bot.say(whiteCards[x])
 
 
 @my_bot.command()
-async def black(message):
+async def black(*args):
 	x = randint(0,len(blackCards)-1)
-	await my_bot.send_message(message.channel, blackCards[x])
+	return await my_bot.say(blackCards[x])
 
 
 @my_bot.command()
-async def random(message):
+async def random(*args):
 	x = randint(0,len(randQuotes)-1)
-	await my_bot.send_message(message.channel, randQuotes[x])
+	return await my_bot.say(randQuotes[x])
 
 
 @my_bot.command()
-async def fmk(message, *args):
+async def fmk(*args):
 	arr = []
 	for x in args:
 		arr.append(x)
@@ -164,17 +133,17 @@ async def fmk(message, *args):
 	arr.remove(arr[x])
 
 	result += "\nKill: " + arr[0]
-	await my_bot.send_message(message.channel, result)
+	return await my_bot.say(result)
 
 
 @my_bot.command()
-async def ck(message):
+async def ck(*args):
 	x = randint(0,len(ckQuotes)-1)
-	await my_bot.send_message(args.message, ckQuotes[x])
+	return await my_bot.say(ckQuotes[x])
 
 
 @my_bot.command()
-async def xkcd(message, *args):
+async def xkcd(*args):
 	if len(args) != 0:
 		url = "https://xkcd.com/" + args[0] + "/"
 		soup = BeautifulSoup(urllib.request.urlopen(url).read())
@@ -184,11 +153,11 @@ async def xkcd(message, *args):
 		soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read())
 		comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
 		result = "https:" + comic[0]['src']
-	await my_bot.send_message(args.message, result)
+		return await my_bot.say(result)
 
 
 @my_bot.command()
-async def twit(message, *args):
+async def twitter(*args):
 	if len(args) != 0:
 		api = twitter.Api(
 			consumer_key=os.environ.get('TWITTER_CONSUMER_KEY'),
@@ -200,7 +169,7 @@ async def twit(message, *args):
 		result = "@" + statuses[0].user.screen_name + ": " + statuses[0].text
 	else:
 		result = "No twitter user specified! Syntax: " + my_bot.command_prefix + "twitter [username]"
-	await my_bot.send_message(message.channel, result)
+	return await my_bot.say(result)
 
 my_bot.run(os.environ.get('DISCORD_KEY'))
 
