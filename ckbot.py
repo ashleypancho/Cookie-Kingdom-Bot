@@ -171,10 +171,9 @@ async def twit(*args):
 		result = "No twitter user specified! Syntax: " + my_bot.command_prefix + "twitter [username]"
 	return await my_bot.say(result)
 
-@my_bot.event
-async def on_message(message):
-	if "egg" in message.content:
-		await my_bot.send_message(message.channel, ":rotating_light: EGG :rotating_light:")
+@my_bot.command()
+async def wiggle(*args):
+	return await my_bot.say("https://www.youtube.com/watch?v=hiP14ED28CA")
 
 my_bot.run(os.environ.get('DISCORD_KEY'))
 
