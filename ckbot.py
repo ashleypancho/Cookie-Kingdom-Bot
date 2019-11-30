@@ -146,11 +146,11 @@ async def ck(*args):
 async def xkcd(*args):
 	if len(args) != 0:
 		url = "https://xkcd.com/" + args[0] + "/"
-		soup = BeautifulSoup(urllib.request.urlopen(url).read())
+		soup = BeautifulSoup(urllib.request.urlopen(url).read(), "html.parser")
 		img = soup.select_one("div#comic > img")
 		result = "https:" + img['src']
 	else:
-		soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read())
+		soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read(), "html.parser")
 		comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
 		result = "https:" + comic[0]['src']
 		return await my_bot.say(result)
