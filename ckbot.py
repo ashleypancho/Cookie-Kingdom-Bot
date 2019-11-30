@@ -148,7 +148,7 @@ async def xkcd(*args):
 		url = "https://xkcd.com/" + args[0] + "/"
 		soup = BeautifulSoup(urllib.request.urlopen(url).read())
 		#comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
-		img = soup.select_one("div#imgTagWrapperId > img")
+		img = soup.select_one("div#comic > img")
 		result = "https:" + img['src']
 	else:
 		soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read())
