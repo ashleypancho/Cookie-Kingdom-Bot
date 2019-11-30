@@ -153,7 +153,7 @@ async def xkcd(*args):
 		soup = BeautifulSoup(urllib.request.urlopen("https://c.xkcd.com/random/comic/").read(), "html.parser")
 		comic = soup.findAll('img', src=re.compile("//imgs\.xkcd\.com/comics"))
 		result = "https:" + comic[0]['src']
-		return await my_bot.say(result)
+	return await my_bot.say(result)
 
 
 @my_bot.command()
